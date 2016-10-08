@@ -13,7 +13,7 @@ class ItemsController < ApplicationController
 
   # /items/new GET
   def new
-
+  	@item = Item.new
   end
 
   # /items/1/edit GET
