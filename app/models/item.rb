@@ -5,6 +5,13 @@ class Item < ApplicationRecord
 
   validates :name, presence: true
 
+  has_many :positions
+  has_many :carts, through: :positions
+
+  has_many :comments, as: :commentable
+  has_many :images,   as: :imageable
+  accepts_nested_attributes_for :images
+
   # belongs_to :category
 
   # after_initialize { } #Item.new; Item.first

@@ -1,10 +1,16 @@
 class ItemsController < ApplicationController
 
 	before_filter :find_item, only:      [:show, :edit, :update, :destroy, :upvote]
-	before_filter :check_if_admin, only: [:edit, :update, :new, :create, :destroy]
+	# before_filter :check_if_admin, only: [:edit, :update, :new, :create, :destroy]
 
   def index
-  	@items = Item.all
+    @items = Item
+  	@items = @item.where("price >= ?", params[:price_from]) if params[:price_from]
+    @items = @items.where("created_at >= ?", 1.day.ago)     if params[:today]
+    @items = @items.where("votes_count >= ?", params[:votes_from])     if params[:votes_from]
+    @items = @items.order("votes_count DESC", "price")
+    # @items = @items.includes(:images)
+    # @item.image = params[:file]
   end
 
   def expensive
@@ -31,8 +37,6 @@ class ItemsController < ApplicationController
 
   # /items POST
   def create
-  	# @item = Item.create(item_params)
-  	# render text: "#{@item.id}: #{@item.name} (#{!@item.new_record?})"
   	@item = Item.create(item_params)
   	if @item.errors.empty?
   		redirect_to item_path(@item)
@@ -71,7 +75,7 @@ class ItemsController < ApplicationController
 		end
 	
 	  def item_params
-	   params.require(:item).permit(:name, :description, :price, :real, :weight)		
+	   params.require(:item).permit(:name, :description, :price, :real, :weight, :image)		
 	  end
 
 end

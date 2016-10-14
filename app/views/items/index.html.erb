@@ -3,10 +3,11 @@
 <% if @items.empty? %>
 	<b>No items in store</b>
 <% else %>
-	<table>
+	<table class="items">
 		<tr>
 			<th>item id</th>
 			<th>Name</th>
+			<th>Image</th>
 			<th>Price</th>
 			<th></th>
 			<th></th>
@@ -17,6 +18,7 @@
 			<tr>
 				<td><%= i.id %></td>
 				<td><%= link_to i.name, item_path(i) %></td>
+				<td><%= image_tag i.image.pathmap("/uploads/images/#{i.image}"), width: '150px', height: '100px' if i.image %></td>
 				<td><%= i.price %> руб.</td>
 				<td><%= link_to "Удалить", item_path(i), method: :delete, data: { confirm: "Точно удалить товар?" } %></td>
 				<td>Рейтинг: <%= i.votes_count %>, <%= link_to "+", upvote_item_path(i) %></td>
