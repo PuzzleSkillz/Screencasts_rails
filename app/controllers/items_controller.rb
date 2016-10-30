@@ -62,7 +62,9 @@ class ItemsController < ApplicationController
   # /items/1 DELETE
   def destroy
   	@item.destroy
-  	redirect_to action: "index"
+    render json: { success: true }
+    ItemsMailer.item_destroyed(@item).deliver
+  	# redirect_to action: "index"
   end
 
   def upvote
