@@ -22,6 +22,8 @@
        <% end %>   
 
    </div>
+  <p style="color: red;"><%= flash[:error] %></p>
+  <p style="color: green;"><%= flash[:success] %></p>
   <p class="notice"><%= notice %></p> 
   <p class="alert"><%= alert %></p> 
     <%= yield %>

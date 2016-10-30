@@ -3,6 +3,14 @@
 <ul>
 	<li><%= @item.price %>руб.</li>
 	<li><%= urls_to_links(urls_to_images(@item.description)) %></li>
-	<li>Вес: <%= @item.weight %>кг.</li>
+	<li><%= t("item.weight") %> <%= @item.weight %>кг.</li>
 
 </ul>
+<!-- %h2= @item.name
+
+ %ul
+ 	%li= "#{@item.price} руб."
+	%li= urls_to_links(urls_to_images(@item.description))
+	%li
+	  = t("item.weight") 
+	  = "#{@item.weight} кг." -->

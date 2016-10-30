@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
 
-	before_filter :find_item, only:      [:show, :edit, :update, :destroy, :upvote]
-	# before_filter :check_if_admin, only: [:edit, :update, :new, :create, :destroy]
+	before_action :find_item, only:      [:show, :edit, :update, :destroy, :upvote]
+	before_action :check_if_admin, only: [:edit, :update, :new, :create, :destroy]
 
   def index
     @items = Item
@@ -20,6 +20,7 @@ class ItemsController < ApplicationController
 
   # /items/1 GET
   def show
+    # raise "exception test"
   	unless @item 
   		# = Item.where(id: params[:id]).first
   		render text: "Page not found", status: 404
@@ -49,9 +50,11 @@ class ItemsController < ApplicationController
   def update
   	@item.update_attributes(item_params)
   	if @item.errors.empty?
+      flash[:success] = "Item successfully updated!"
   		redirect_to item_path(@item)
   		# redirect_to crop_image_item_path(@item)
   	else
+      flash.now[:error] = "You made mistakes in your form"
   		render "edit"
   	end
   end

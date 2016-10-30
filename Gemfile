@@ -17,8 +17,13 @@ gem 'coffee-rails', '~> 4.2'
 # gem 'therubyracer', platforms: :ruby
 
 gem 'devise'
-gem "mini_magick"
+gem 'mini_magick'
 gem 'carrierwave'
+# gem 'jcrop-rails'
+gem 'haml-rails'
+gem 'bootstrap-sass'
+gem 'simple_form'
+gem 'exception_notification'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
@@ -33,6 +38,8 @@ gem 'jbuilder', '~> 2.5'
 group :test do
 	gem 'rspec-rails'
 	gem 'factory_girl'
+  gem 'factory_girl_rails'
+  gem 'rails-controller-testing'
 end
 
 # Use Capistrano for deployment
